@@ -30,6 +30,11 @@ Route::put('/account/{id}', [AuthController::class, 'update'])->name('account.up
 
 /*Кредиты*/
 Route::get('/credit1', [Credit1Controller::class, 'create'])->name('credit1.create');
+Route::post('/credit1', [Credit1Controller::class, 'store'])->name('credit1.store');
+
+
+
+
 Route::get('/credit2', [Credit2Controller::class, 'create'])->name('credit2.create');
 Route::get('/credit3', [Credit3Controller::class, 'create'])->name('credit3.create');
 

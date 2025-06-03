@@ -62,8 +62,8 @@ class AuthController extends Controller
             'name' => ['required', 'string'],
             'patronymic' => ['nullable', 'string'],
 
-            'passport_id' => ['required', 'string' ,'unique:users', 'max:9', 'min:9'],
-            'passport_inn' => ['required', 'integer', 'unique:users', 'max:14', 'min:14'],
+            'passport_id' => ['required', 'string' ,'unique:users', 'max:9' ],
+            'passport_inn' => ['required', 'integer', 'unique:users',  'min:14'],
             'issued_by' => ['required', 'string'],
             'date_start' => ['required', 'date'],
             'date_end' => ['nullable', 'date'],
