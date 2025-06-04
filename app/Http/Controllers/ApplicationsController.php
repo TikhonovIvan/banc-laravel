@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AutoCreditApplication;
+use App\Models\LoanApplication;
+use App\Models\MortgageApplication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApplicationsController extends Controller
 {
@@ -11,7 +15,17 @@ class ApplicationsController extends Controller
      */
     public function index()
     {
-        return view('users.applications.index');
+        $userId = Auth::id();
+
+        $loanApplications = LoanApplication::where('user_id', $userId)->get();
+        $mortgageApplications = MortgageApplication::where('user_id', $userId)->get();
+        $autoCreditApplications = AutoCreditApplication::where('user_id', $userId)->get();
+
+        return view('users.applications.index', compact(
+            'loanApplications',
+            'mortgageApplications',
+            'autoCreditApplications'
+        ));
     }
 
     /**

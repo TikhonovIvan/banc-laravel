@@ -15,6 +15,7 @@ class LoanApplication extends Model
         'term_months',
         'income_proof',
         'credit_purpose',
+        'interest_rate',
         'comment',
         'status',
     ];
@@ -29,6 +30,11 @@ class LoanApplication extends Model
     public function documents()
     {
         return $this->hasMany(LoanDocument::class);
+    }
+
+    public function documentsf()
+    {
+        return $this->hasMany(LoanDocument::class, 'application_id');
     }
 
 }

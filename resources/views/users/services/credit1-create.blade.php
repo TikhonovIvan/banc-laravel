@@ -79,6 +79,10 @@
                                         </select>
                                         <div class="invalid-feedback">Please select a valid category.</div>
                                     </div>
+                                    <div class="col-4">
+                                        <input type="hidden" name="interest_rate" value="8">
+                                        <label class="mt-5">Процентная ставка 8%</label>
+                                    </div>
                                 </div>
                             </div>
 

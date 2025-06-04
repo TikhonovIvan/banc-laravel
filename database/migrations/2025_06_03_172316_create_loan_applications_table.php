@@ -24,12 +24,20 @@ return new class extends Migration
 
             $table->string('credit_purpose'); // Кредит для покупки
 
+            $table->decimal('interest_rate', 5, 2); // Процентная ставка
+
             $table->text('comment')->nullable(); // Комментарий
 
-            $table->enum('status', ['в обработке', 'одобрено'])->default('в обработке'); // Статус заявки
+            $table->enum('status', [
+                'в обработке',
+                'одобрено',
+                'отклонено',
+                'ожидает документов'
+            ])->default('в обработке');
 
             $table->timestamps();
         });
+
     }
 
     /**
