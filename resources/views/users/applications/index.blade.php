@@ -55,7 +55,7 @@
                                 <p class="card-text">Процентная ставка: {{ $application->interest_rate }}%</p>
 
                                 <div class="mt-auto">
-                                    <a href="#" class="btn-cast">Узнать подробности</a>
+                                    <a href="{{ route('credit1.show', $application->id) }}" class="btn-cast">Узнать подробности</a>
                                     <a href="{{ route('credit1.edit', $application->id) }}" class="btn-cast">Обновить заявку</a>
                                     <form action="{{ route('credit1.destroy', $application->id) }}" method="POST" onsubmit="return confirm('Вы уверены, что хотите отменить заявку?');">
                                         @csrf
@@ -79,7 +79,7 @@
                                 <p class="card-text">Тип недвижимости: {{ $application->property_type }}</p>
                                 <p class="card-text">Процентная ставка: {{ $application->interest_rate }}%</p>
                                 <div class="mt-auto">
-                                    <a href="#" class="btn-cast">Узнать подробности</a>
+                                    <a href="{{ route('credit2.show', $application->id) }}" class="btn-cast">Узнать подробности</a>
                                     <a href="{{ route('credit2.edit', $application->id) }}" class="btn-cast">Обновить заявку</a>
                                     <form action="{{ route('credit2.destroy', $application->id) }}" method="POST" onsubmit="return confirm('Вы уверены, что хотите отменить заявку?');">
                                         @csrf

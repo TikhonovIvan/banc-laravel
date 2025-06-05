@@ -42,43 +42,52 @@
 
             <div class="wrapper-block-cards">
                 <div class="wrapper-block-cards d-flex flex-wrap gap-4">
-
                     @php
-                        $loanAmount = $application->loan_amount - $application->initial_payment;
+                        $principal = $application->car_price - $application->initial_payment;
                         $months = $application->term_months;
-                        $rate = $application->interest_rate / 100 / 12;
+                        $annualRate = $application->interest_rate;
 
-                        if ($rate > 0 && $months > 0) {
-                            $monthlyPayment = $loanAmount * ($rate * pow(1 + $rate, $months)) / (pow(1 + $rate, $months) - 1);
-                            $monthlyPaymentFormatted = number_format($monthlyPayment, 2, '.', ' ');
-
-                            $totalRepayment = $monthlyPayment * $months;
-                            $overpayment = $totalRepayment - $loanAmount;
-                            $overpaymentFormatted = number_format($overpayment, 2, '.', ' ');
+                        if ($principal > 0 && $months > 0 && $annualRate !== null) {
+                            $monthlyRate = $annualRate / 12 / 100;
+                            $monthlyPayment = $principal * ($monthlyRate * pow(1 + $monthlyRate, $months)) / (pow(1 + $monthlyRate, $months) - 1);
+                            $totalPayment = $monthlyPayment * $months;
+                            $overpayment = $totalPayment - $principal;
                         } else {
-                            $monthlyPaymentFormatted = 'N/A';
-                            $overpaymentFormatted = 'N/A';
+                            $monthlyPayment = null;
+                            $overpayment = null;
+                            $totalPayment = null;
                         }
                     @endphp
-              <div class="row">
-                  <div class="col-12">
-                      <p class="card-text">Статус заявки: <span>{{ $application->status }}</span></p>
-                      <p class="card-text">Сумма кредита: {{ $application->loan_amount }}  сом</p>
-                      <p class="card-text">Срок кредита: {{ $application->term_months }} мес.</p>
-                      <p class="card-text">Марка и модель: {{ $application->car_make_model }}</p>
-                      <p class="card-text">Год выпуска: {{ $application->car_year }} г.</p>
-                      <p class="card-text">Тип автомобиля : {{ $application->car_type }} </p>
-                      <p class="card-text">Стоимость автомобиля: {{ $application->car_price }} </p>
-                      <p class="card-text">Первоначальный взнос: {{ $application->initial_payment }} </p>
-                      <p class="card-text">Цель покупки: {{ $application->purpose }} </p>
-                      <p class="card-text">Процентная ставка: {{ $application->interest_rate ?? 'N/A' }}%</p>
 
-                      <p class="card-text">Ежемесячный платёж: {{ $monthlyPaymentFormatted }} сом</p>
-                      <p class="card-text">Переплата: {{ $overpaymentFormatted }} сом</p>
-                      <p class="card-text">Комментарий: {{  $application->comment }}</p>
-                  </div>
 
-              </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="card-text">Статус заявки: <span>{{ $application->status }}</span></p>
+                            <p class="card-text">Сумма кредита: {{ $application->loan_amount }}  сом</p>
+                            <p class="card-text">Срок кредита: {{ $application->term_months }} мес.</p>
+                            <p class="card-text">Марка и модель: {{ $application->car_make_model }}</p>
+                            <p class="card-text">Год выпуска: {{ $application->car_year }} г.</p>
+                            <p class="card-text">Тип автомобиля : {{ $application->car_type }} </p>
+                            <p class="card-text">Стоимость автомобиля: {{ $application->car_price }} </p>
+                            <p class="card-text">Первоначальный взнос: {{ $application->initial_payment }} </p>
+                            <p class="card-text">Цель покупки: {{ $application->purpose }} </p>
+                            <p class="card-text">Процентная ставка: {{ $application->interest_rate ?? 'N/A' }}%</p>
+
+
+                            <p class="card-text">
+                                Ежемесячный платёж: {{ $monthlyPayment ? number_format($monthlyPayment, 2, '.', ' ') . ' сом' : 'N/A' }}
+                            </p>
+                            <p class="card-text">
+                                Переплата: {{ $overpayment ? number_format($overpayment, 2, '.', ' ') . ' сом' : 'N/A' }}
+                            </p>
+                            <p class="card-text">
+                                Итоговая сумма к выплате: {{ $totalPayment ? number_format($totalPayment, 2, '.', ' ') . ' сом' : 'N/A' }}
+                            </p>
+
+                            <p class="card-text">Комментарий: {{  $application->comment }}</p>
+                        </div>
+
+                    </div>
 
             </div>
         </div>

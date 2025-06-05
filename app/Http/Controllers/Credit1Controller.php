@@ -76,9 +76,10 @@ class Credit1Controller extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
+    public function show(string $id){
+        $application = LoanApplication::with('documents')->findOrFail($id);
+
+        return view('users.applications.credit1.show', compact('application'));
     }
 
     /**

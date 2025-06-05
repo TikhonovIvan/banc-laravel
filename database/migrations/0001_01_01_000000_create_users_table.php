@@ -37,6 +37,7 @@ return new class extends Migration
             $table->string('position_at_work')->nullable();
             $table->string('work_address')->nullable();
 
+            $table->enum('role', ['admin', 'employee', 'user'])->default('user');
 
             $table->rememberToken();
             $table->timestamps();

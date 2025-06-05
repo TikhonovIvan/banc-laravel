@@ -34,7 +34,7 @@ Route::post('/credit1', [Credit1Controller::class, 'store'])->name('credit1.stor
 Route::get('/credit1/{id}/edit', [Credit1Controller::class, 'edit'])->name('credit1.edit');
 Route::put('/credit1/{id}', [Credit1Controller::class, 'update'])->name('credit1.update');
 Route::delete('/credit1/documents/{id}', [Credit1Controller::class, 'destroyDocument'])->name('credit1.document.destroy');
-
+Route::get('/credit1/{id}/show', [Credit1Controller::class, 'show'])->name('credit1.show');
 
 
 Route::delete('/credit1/{id}', [Credit1Controller::class, 'destroy'])->name('credit1.destroy');
@@ -47,6 +47,7 @@ Route::post('/credit2', [Credit2Controller::class, 'store'])->name('credit2.stor
 Route::get('/credit2/{id}/edit', [Credit2Controller::class, 'edit'])->name('credit2.edit');
 Route::put('/credit2/{id}', [Credit2Controller::class, 'update'])->name('credit2.update');
 Route::delete('/credit2/document/{id}', [Credit2Controller::class, 'destroyDocument'])->name('credit2.document.destroy');
+Route::get('/credit2/{id}/show', [Credit2Controller::class, 'show'])->name('credit2.show');
 
 
 

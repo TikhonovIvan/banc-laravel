@@ -39,6 +39,8 @@ class User extends Authenticatable
         'phone',
         'position_at_work',
         'work_address',
+        'role'
+
     ];
 
     /**

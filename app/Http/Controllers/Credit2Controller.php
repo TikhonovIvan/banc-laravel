@@ -68,14 +68,13 @@ class Credit2Controller extends Controller
         return redirect()->route('applications.index')->with('success', 'Заявка успешно отправлена');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
+
+    public function show(string $id){
+        $application = MortgageApplication::with('documents')->findOrFail($id);
+
+        return view('users.applications.credit2.show', compact('application'));
+    }
     /**
      * Show the form for editing the specified resource.
      */
