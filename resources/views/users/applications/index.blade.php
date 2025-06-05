@@ -48,7 +48,20 @@
                         <div class="card d-flex flex-column" style="width: 18rem; ">
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">Потребительский кредит</h5>
-                                <p class="card-text">Статус заявки: <span>{{ $application->status }}</span></p>
+                                <p class="card-text">
+                                    Статус заявки:
+                                    @if ($application->status === 'одобрено')
+                                        <span class="text-success">{{ $application->status }}</span>
+                                    @elseif ($application->status === 'отклонено')
+                                        <span class="text-danger">{{ $application->status }}</span>
+                                    @elseif ($application->status === 'в обработке')
+                                        <span class="text-primary">{{ $application->status }}</span>
+                                    @elseif ($application->status === 'ожидает документов')
+                                        <span class="text-secondary">{{ $application->status }}</span>
+                                    @else
+                                        <span class="text-muted">{{ $application->status }}</span>
+                                    @endif
+                                </p>
                                 <p class="card-text">Сумма кредита: {{ number_format($application->amount, 0, '.', ' ') }} сом</p>
                                 <p class="card-text">Срок кредита: {{ $application->term_months }} мес.</p>
                                 <p class="card-text">Кредит для: {{ $application->credit_purpose }}</p>

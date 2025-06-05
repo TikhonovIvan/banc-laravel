@@ -29,7 +29,9 @@ Route::put('/account/{id}', [AuthController::class, 'update'])->name('account.up
 
 
 /*Кредиты*/
-Route::get('/credit1', [Credit1Controller::class, 'create'])->name('credit1.create');
+Route::get('/credit1', [Credit1Controller::class, 'index'])->name('credit1.index');
+
+Route::get('/credit1/create', [Credit1Controller::class, 'create'])->name('credit1.create');
 Route::post('/credit1', [Credit1Controller::class, 'store'])->name('credit1.store');
 Route::get('/credit1/{id}/edit', [Credit1Controller::class, 'edit'])->name('credit1.edit');
 Route::put('/credit1/{id}', [Credit1Controller::class, 'update'])->name('credit1.update');

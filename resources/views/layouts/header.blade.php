@@ -35,6 +35,22 @@
                                                     </li>
                                                 </ul>
                                             </li>
+                                            @can('index-credit1')
+                                            <li class="">
+                                                <a href="#">Все заявки</a>
+                                                <ul class="submenu">
+                                                    <li>
+                                                        <a href="{{route('credit1.index')}}">Потребительский кредит</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">Ипотечное кредитование</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">Автокредит</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            @endcan
 
                                             <li>
                                                 <a href="blog.html">Блог</a>
