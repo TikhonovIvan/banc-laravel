@@ -120,6 +120,10 @@ class AuthController extends Controller
      */
     public function edit(string $id)
     {
+        $user = User::all()->find($id);
+        return view('admin.user-edit',[
+            'user' => $user
+        ]);
 
     }
 

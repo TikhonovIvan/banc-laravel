@@ -34,7 +34,7 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <h3 class="mb-5 text-center">Личный кабинет</h3>
+                        <h3 class="mb-5 text-center">Редактировать данные пользователя</h3>
                         <form class="needs-validation" novalidate method="post" action="{{route('account.update', $user->id)}}">
                             @csrf
                             @method('PUT')

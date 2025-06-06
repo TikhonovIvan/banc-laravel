@@ -26,8 +26,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/account', [AuthController::class, 'accountForm'])->name('account.edit');
+    Route::get('/account/{id}/edit', [AuthController::class, 'edit'])->name('account-admin.edit');
     Route::get('/users', [HomeController::class, 'indexUsers'])->name('users.index');
+    Route::get('/users/{id}/show', [HomeController::class, 'creditShowUser'])->name('credit-users.show');
+
     Route::put('/account/{id}', [AuthController::class, 'update'])->name('account.update');
+
+
 
 
 
