@@ -180,8 +180,11 @@ class Credit1Controller extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Заявка успешно обновлена.');
 
+        // Перенаправление в зависимости от роли
+        return redirect()
+            ->route(Gate::allows('index-credit1') ? 'credit1.index' : 'applications.index')
+            ->with('success', 'Заявка успешно обновлена.');
 
     }
 

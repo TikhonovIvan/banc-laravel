@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class AuthController extends Controller
 {
@@ -20,18 +21,23 @@ class AuthController extends Controller
     }
 
     public function loginAuth(Request $request){
-       $validated = $request->validate([
-           'email' => ['required', 'email'],
-           'password' => ['required'],
-       ]);
+        $validated = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-       if(Auth::attempt($validated)){
-           return redirect()->route('applications.index')->with('success', 'Добро пожаловать');
-       }
+        if (Auth::attempt($validated)) {
+            // Проверка на роль админа через Gate
+            $redirectRoute = Gate::allows('index-credit1') ? 'credit1.index' : 'applications.index';
+
+            return redirect()->route($redirectRoute)->with('success', 'Добро пожаловать');
+        }
+
         return back()->withErrors([
             'email' => 'Ошибка логин и пароль'
         ]);
     }
+
 
     public function logout()
     {

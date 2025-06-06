@@ -7,6 +7,7 @@ use App\Models\AutoCreditFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
 
 class Credit3Controller extends Controller
 {
@@ -15,7 +16,14 @@ class Credit3Controller extends Controller
      */
     public function index()
     {
-        //
+        if (Gate::denies('index-credit1')) {
+            abort(403);
+        }
+
+        $applications = AutoCreditApplication::with('user')->paginate(10);
+        return view('users.applications.credit3.index', [
+            'applications' => $applications
+        ]);
     }
 
     public function show(string $id){
