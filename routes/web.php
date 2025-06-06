@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Credit1Controller;
 use App\Http\Controllers\Credit2Controller;
 use App\Http\Controllers\Credit3Controller;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest'])->group(function () {
@@ -25,6 +26,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/account', [AuthController::class, 'accountForm'])->name('account.edit');
+    Route::get('/users', [HomeController::class, 'indexUsers'])->name('users.index');
     Route::put('/account/{id}', [AuthController::class, 'update'])->name('account.update');
 
 

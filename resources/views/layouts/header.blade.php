@@ -57,7 +57,7 @@
                                                         </li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="#" class="">Пользователи</a></li>
+                                                <li><a href="{{ route('users.index') }}" class="">Пользователи</a></li>
                                             @endcan
 
                                             {{--                                            <li>--}}

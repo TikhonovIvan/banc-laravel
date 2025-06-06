@@ -21,18 +21,19 @@
                     <th scope="col">Телефон</th>
                     <th scope="col">Город</th>
                     <th scope="col">Адрес</th>
+                    <th scope="col">Действие</th>
 
                 </tr>
                 </thead>
                 <tbody>
-
+                    @foreach($users as $user)
                     <tr>
-                        <th scope="row"></th>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
+                        <th scope="row">{{$user->id}}</th>
+                        <td class="text-center">{{$user->surname}} {{$user->name}} {{$user->patronymic}}</td>
+                        <td class="text-center">{{$user->email}}</td>
+                        <td class="text-center">{{$user->phone}}</td>
+                        <td class="text-center">{{$user->city}}</td>
+                        <td class="text-center">{{$user->address}}</td>
                         <td style="width: 160px;">
                             <a href=""  class="btn btn-success" style="height: 43px; padding: 15px; margin: auto">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
@@ -49,12 +50,12 @@
 
                         </td>
                     </tr>
-                @endforeach
+                    @endforeach
 
                 </tbody>
             </table>
             <div class="mt-4 mb-4 w-100 d-flex justify-content-center">
-                {{ $applications->links() }}
+                {{ $users->links() }}
             </div>
 
         </div>
