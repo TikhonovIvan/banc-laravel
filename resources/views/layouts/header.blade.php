@@ -40,6 +40,7 @@
                                                 </li>
                                             @endif
                                             @can('index-credit1')
+
                                                 <li class="">
                                                     <a href="#">Все заявки</a>
                                                     <ul class="submenu">
@@ -48,26 +49,28 @@
                                                                 кредит</a>
                                                         </li>
                                                         <li>
-                                                            <a href="{{ route('credit2.index') }}">Ипотечное кредитование</a>
+                                                            <a href="{{ route('credit2.index') }}">Ипотечное
+                                                                кредитование</a>
                                                         </li>
                                                         <li>
                                                             <a href="{{ route('credit3.index') }}">Автокредит</a>
                                                         </li>
                                                     </ul>
                                                 </li>
+                                                <li><a href="#" class="">Пользователи</a></li>
                                             @endcan
 
-{{--                                            <li>--}}
-{{--                                                <a href="blog.html">Блог</a>--}}
-{{--                                                <ul class="submenu">--}}
-{{--                                                    <li><a href="blog.html">Блог</a></li>--}}
-{{--                                                    <li>--}}
-{{--                                                        <a href="blog_details.html">Новости</a>--}}
-{{--                                                    </li>--}}
-{{--                                                    <li><a href="elements.html">Element</a></li>--}}
-{{--                                                    <li><a href="apply.html">Apply Now</a></li>--}}
-{{--                                                </ul>--}}
-{{--                                            </li>--}}
+                                            {{--                                            <li>--}}
+                                            {{--                                                <a href="blog.html">Блог</a>--}}
+                                            {{--                                                <ul class="submenu">--}}
+                                            {{--                                                    <li><a href="blog.html">Блог</a></li>--}}
+                                            {{--                                                    <li>--}}
+                                            {{--                                                        <a href="blog_details.html">Новости</a>--}}
+                                            {{--                                                    </li>--}}
+                                            {{--                                                    <li><a href="elements.html">Element</a></li>--}}
+                                            {{--                                                    <li><a href="apply.html">Apply Now</a></li>--}}
+                                            {{--                                                </ul>--}}
+                                            {{--                                            </li>--}}
 
                                             <li><a href="#" class="account">{{auth()->user()->email}}</a></li>
                                         @else

@@ -20,7 +20,45 @@ class Credit3Controller extends Controller
             abort(403);
         }
 
-        $applications = AutoCreditApplication::with('user')->paginate(10);
+        $applications = AutoCreditApplication::with('user')->paginate(1);
+        return view('users.applications.credit3.index', [
+            'applications' => $applications
+        ]);
+    }
+
+
+    public function search(Request $request)
+    {
+        if (Gate::denies('index-credit1')) {
+            abort(403);
+        }
+
+        $query = AutoCreditApplication::with('user');
+
+        if ($request->filled('id')) {
+            $query->where('id', $request->input('id'));
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->input('status'));
+        }
+
+        if ($request->filled('fio')) {
+            $fio = explode(' ', $request->input('fio'));
+
+            $query->whereHas('user', function ($q) use ($fio) {
+                $q->where(function ($sub) use ($fio) {
+                    foreach ($fio as $part) {
+                        $sub->orWhere('name', 'like', "%$part%")
+                            ->orWhere('surname', 'like', "%$part%")
+                            ->orWhere('patronymic', 'like', "%$part%");
+                    }
+                });
+            });
+        }
+
+        $applications = $query->paginate(10)->appends($request->all());
+
         return view('users.applications.credit3.index', [
             'applications' => $applications
         ]);
@@ -29,7 +67,14 @@ class Credit3Controller extends Controller
     public function show(string $id){
         $application = AutoCreditApplication::with('documents')->findOrFail($id);
 
-        return view('users.applications.credit3.show', compact('application'));
+        // Если админ — можно всё. Если обычный пользователь — только свою заявку.
+        if (Gate::allows('index-credit1') || $application->user_id === Auth::id()) {
+            return view('users.applications.credit3.show', compact('application'));
+        }
+
+        abort(403); // Нет доступа
+
+
     }
 
     /**
@@ -92,7 +137,13 @@ class Credit3Controller extends Controller
     {
         $application = AutoCreditApplication::with('documents')->findOrFail($id);
 
-        return view('users.applications.credit3.edit', compact('application'));
+        // Админ может редактировать всё, пользователь — только свою
+        if (Gate::allows('index-credit1') || $application->user_id === Auth::id()) {
+            return view('users.applications.credit3.edit', compact('application'));
+        }
+        // Нет доступа
+        abort(403);
+
     }
 
 
@@ -100,23 +151,38 @@ class Credit3Controller extends Controller
 
     public function update(Request $request, string $id)
     {
-        $validated = $request->validate([
-            'loan_amount' => 'required|numeric',
-            'car_make_model' => 'required|string|max:255',
-            'car_year' => 'required|digits:4|integer|min:1990|max:' . date('Y'),
-            'car_type' => 'required|in:новый,с пробегом',
-            'car_price' => 'required|numeric',
-            'initial_payment' => 'required|numeric',
-            'term_months' => 'required|integer|min:1',
-            'purpose' => 'required|string|max:255',
-            'interest_rate' => 'nullable|numeric|between:0,100',
-            'comment' => 'nullable|string',
-            'documents.*' => 'nullable|file|max:10240',
-        ]);
-
+        // Получаем заявку
         $application = AutoCreditApplication::findOrFail($id);
 
-        $application->update([
+        // Проверка доступа: пользователь может менять только свою заявку
+        if (!Gate::allows('index-credit1') && $application->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        // Общие правила валидации
+        $rules = [
+            'loan_amount' => ['required', 'numeric'],
+            'car_make_model' => ['required', 'string', 'max:255'],
+            'car_year' => ['required', 'digits:4', 'integer', 'min:1990', 'max:' . date('Y')],
+            'car_type' => ['required', 'in:новый,с пробегом'],
+            'car_price' => ['required', 'numeric'],
+            'initial_payment' => ['required', 'numeric'],
+            'term_months' => ['required', 'integer', 'min:1'],
+            'purpose' => ['required', 'string', 'max:255'],
+            'interest_rate' => ['nullable', 'numeric', 'between:0,100'],
+            'comment' => ['nullable', 'string'],
+            'documents.*' => ['nullable', 'file', 'mimes:txt,docx,xlsx,pdf,jpg,jpeg,png', 'max:10240'],
+        ];
+
+        // Дополнительное правило для администратора
+        if (Gate::allows('index-credit1')) {
+            $rules['status'] = ['required', 'in:в обработке,одобрено,отклонено,ожидает документов'];
+        }
+
+        $validated = $request->validate($rules);
+
+        // Обновление полей
+        $application->fill([
             'loan_amount' => $validated['loan_amount'],
             'car_make_model' => $validated['car_make_model'],
             'car_year' => $validated['car_year'],
@@ -129,20 +195,36 @@ class Credit3Controller extends Controller
             'comment' => $validated['comment'] ?? null,
         ]);
 
-        // Сохраняем новые файлы с original_name
+        // Обновление статуса, если админ
+        if (Gate::allows('index-credit1') && isset($validated['status'])) {
+            $application->status = $validated['status'];
+        }
+
+        $application->save();
+
+        // Загрузка новых файлов
         if ($request->hasFile('documents')) {
+            $uploadPath = public_path("uploads/credit_auto/{$application->id}");
+            File::ensureDirectoryExists($uploadPath);
+
             foreach ($request->file('documents') as $file) {
-                $path = $file->store("credit_auto/{$application->id}", 'public');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $file->move($uploadPath, $filename);
+
                 AutoCreditFile::create([
                     'auto_credit_application_id' => $application->id,
-                    'file_path' => $path,
+                    'file_path' => "uploads/credit_auto/{$application->id}/{$filename}",
                     'original_name' => $file->getClientOriginalName(),
                 ]);
             }
         }
 
-        return redirect()->route('applications.index')->with('success', 'Заявка успешно обновлена');
+        // Перенаправление в зависимости от роли
+        return redirect()
+            ->route(Gate::allows('index-credit1') ? 'credit3.index' : 'applications.index')
+            ->with('success', 'Заявка успешно обновлена.');
     }
+
 
     public function destroyDocument(string $id)
     {

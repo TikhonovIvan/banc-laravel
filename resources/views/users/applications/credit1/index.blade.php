@@ -9,6 +9,33 @@
         <div class="row">
             <h3 class="text-center mb-5">Заявки по Потребительского кредита </h3>
         </div>
+
+        <form action="{{ route('credit1.search') }}" method="GET" class="mb-4">
+            <div class="row">
+                <div class="col-md-2">
+                    <input type="text" name="id" class="form-control" placeholder="ID заявки" value="{{ request('id') }}">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="fio" class="form-control" placeholder="ФИО клиента" value="{{ request('fio') }}">
+                </div>
+                <div class="col-md-3">
+                    <select name="status" class="form-control">
+                        <option value="">-- Статус --</option>
+                        <option value="одобрено" {{ request('status') == 'одобрено' ? 'selected' : '' }}>одобрено</option>
+                        <option value="отклонено" {{ request('status') == 'отклонено' ? 'selected' : '' }}>отклонено</option>
+                        <option value="в обработке" {{ request('status') == 'в обработке' ? 'selected' : '' }}>в обработке</option>
+                        <option value="ожидает документов" {{ request('status') == 'ожидает документов' ? 'selected' : '' }}>ожидает документов</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Поиск</button>
+                </div>
+                <div class="col-md-2">
+                    <a href="{{ route('credit1.index') }}" class="btn btn-secondary w-100">Сбросить</a>
+                </div>
+            </div>
+        </form>
+
         <div class="row">
             <table class="table">
                 <thead>
@@ -37,7 +64,7 @@
                                 @elseif ($application->status === 'в обработке')
                                     <span class="text-primary">{{ $application->status }}</span>
                                 @elseif ($application->status === 'ожидает документов')
-                                    <span class="text-secondary">{{ $application->status }}</span>
+                                    <span class="text-warning">{{ $application->status }}</span>
                                 @else
                                     <span class="text-muted">{{ $application->status }}</span>
                                 @endif
@@ -67,6 +94,9 @@
 
                 </tbody>
             </table>
+            <div class="mt-4 mb-4 w-100 d-flex justify-content-center">
+                {{ $applications->links() }}
+            </div>
 
         </div>
 

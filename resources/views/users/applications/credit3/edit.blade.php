@@ -112,6 +112,32 @@
                                 </div>
                             </div>
 
+                            @can('index-credit1')
+                                <div class="form-row mt-4">
+                                    <div class="col-md-12">
+                                        <label for="status">Статус заявки:</label><br>
+
+                                        @php
+                                            $statuses = ['в обработке', 'одобрено', 'отклонено', 'ожидает документов'];
+                                        @endphp
+
+                                        @foreach($statuses as $status)
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input"
+                                                       type="radio"
+                                                       name="status"
+                                                       id="status_{{ $loop->index }}"
+                                                       value="{{ $status }}"
+                                                    {{ $application->status === $status ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="status_{{ $loop->index }}">
+                                                    {{ ucfirst($status) }}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endcan
+
                             <button class="btn header-btn mt-3" type="submit">Обновить заявку</button>
                         </form>
                     </div>

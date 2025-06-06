@@ -47,8 +47,9 @@
                                         id="validationCustom01"
                                         required
                                         value="{{old('surname')}}"
+                                        placeholder="Укажите фамилию"
                                     />
-                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="valid-feedback">Все хорошо!</div>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="validationCustom02">Имя</label>
@@ -59,11 +60,12 @@
                                         id="validationCustom02"
                                         required
                                         value="{{old('name')}}"
+                                        placeholder="Укажите имя"
                                     />
-                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="valid-feedback">Все хорошо!</div>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="validationCustom02">Очестов</label>
+                                    <label for="validationCustom02">Отчество</label>
                                     <input
                                         name="patronymic"
                                         type="text"
@@ -71,8 +73,9 @@
                                         id="validationCustom02"
                                         required
                                         value="{{old('patronymic')}}"
+                                        placeholder="Укажите отчество"
                                     />
-                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="valid-feedback">Все хорошо!</div>
                                 </div>
                             </div>
 
@@ -86,8 +89,9 @@
                                         id="validationCustom01"
                                         required
                                         value="{{old('passport_id')}}"
+                                        placeholder="ID0102030"
                                     />
-                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="valid-feedback">Все хорошо!</div>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="validationCustom02">ИНН паспорта</label>
@@ -98,8 +102,9 @@
                                         id="validationCustom02"
                                         required
                                         value="{{old('passport_inn')}}"
+                                        placeholder="Укажите 14 значное число"
                                     />
-                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="valid-feedback">Все хорошо!</div>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="validationCustom02">Кем выдано </label>
@@ -110,8 +115,9 @@
                                         id="validationCustom02"
                                         required
                                         value="{{old('issued_by')}}"
+                                        placeholder="MKK-0112"
                                     />
-                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="valid-feedback">Все хорошо!</div>
                                 </div>
                             </div>
 
@@ -126,7 +132,7 @@
                                         required
                                         value="{{old('date_start')}}"
                                     />
-                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="valid-feedback">Все хорошо!</div>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="validationCustom02">Срок окончания </label>
@@ -138,7 +144,7 @@
                                         required
                                         value="{{old('date_end')}}"
                                     />
-                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="valid-feedback">Все хорошо!</div>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="validationCustom02">Дата рождения</label>
@@ -150,7 +156,7 @@
                                         required
                                         value="{{old('birth')}}"
                                     />
-                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="valid-feedback">Все хорошо!</div>
                                 </div>
                             </div>
 
@@ -164,6 +170,7 @@
                                         id="validationCustom03"
                                         required
                                         value="{{old('city')}}"
+                                        placeholder="Бишкек"
                                     />
                                     <div class="invalid-feedback">
                                         Please provide a valid city.
@@ -178,6 +185,7 @@
                                         id="validationCustom03"
                                         required
                                         value="{{old('address')}}"
+                                        placeholder="Админская улица, 1"
                                     />
                                     <div class="invalid-feedback">
                                         Please provide a valid city.
@@ -221,6 +229,7 @@
                                         id="validationCustom01"
                                         required
                                         value="{{old('email')}}"
+                                        placeholder="user@gmail.com"
                                     />
                                     <div class="valid-feedback">Looks good!</div>
                                 </div>
@@ -232,6 +241,7 @@
                                         class="form-control"
                                         id="validationCustom02"
                                         required
+                                        placeholder="Введите пароль"
                                     />
                                     <div class="valid-feedback">Looks good!</div>
                                 </div>
@@ -243,6 +253,7 @@
                                         class="form-control"
                                         id="validationCustom02"
                                         required
+                                        placeholder="Введите пароль"
                                     />
                                     <div class="valid-feedback">Looks good!</div>
                                 </div>
@@ -257,6 +268,7 @@
                                         id="validationCustom01"
                                         required
                                         value="{{old('phone')}}"
+                                        placeholder="+99650505050"
 
                                     />
                                     <div class="valid-feedback">Looks good!</div>
@@ -272,6 +284,7 @@
                                         id="validationCustom02"
                                         required
                                         value="{{old('position_at_work')}}"
+                                        placeholder="Инженер..."
                                     />
                                     <div class="valid-feedback">Looks good!</div>
                                 </div>
@@ -284,6 +297,7 @@
                                         id="validationCustom02"
                                         required
                                         value="{{old('work_address')}}"
+                                        placeholder="Адрес работы"
                                     />
                                     <div class="valid-feedback">Looks good!</div>
                                 </div>

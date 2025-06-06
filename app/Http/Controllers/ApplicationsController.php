@@ -17,9 +17,9 @@ class ApplicationsController extends Controller
     {
         $userId = Auth::id();
 
-        $loanApplications = LoanApplication::where('user_id', $userId)->get();
-        $mortgageApplications = MortgageApplication::where('user_id', $userId)->get();
-        $autoCreditApplications = AutoCreditApplication::where('user_id', $userId)->get();
+        $loanApplications = LoanApplication::where('user_id', $userId)->paginate(3, ['*'], 'loan_page');
+        $mortgageApplications = MortgageApplication::where('user_id', $userId)->paginate(3, ['*'], 'mortgage_page');
+        $autoCreditApplications = AutoCreditApplication::where('user_id', $userId)->paginate(3, ['*'], 'auto_page');
 
         return view('users.applications.index', compact(
             'loanApplications',

@@ -21,7 +21,44 @@ class Credit2Controller extends Controller
             abort(403);
         }
 
-        $applications = MortgageApplication::with('user')->paginate(10);
+        $applications = MortgageApplication::with('user')->paginate(1);
+        return view('users.applications.credit2.index', [
+            'applications' => $applications
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        if (Gate::denies('index-credit1')) {
+            abort(403);
+        }
+
+        $query = MortgageApplication::with('user');
+
+        if ($request->filled('id')) {
+            $query->where('id', $request->input('id'));
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->input('status'));
+        }
+
+        if ($request->filled('fio')) {
+            $fio = explode(' ', $request->input('fio'));
+
+            $query->whereHas('user', function ($q) use ($fio) {
+                $q->where(function ($sub) use ($fio) {
+                    foreach ($fio as $part) {
+                        $sub->orWhere('name', 'like', "%$part%")
+                            ->orWhere('surname', 'like', "%$part%")
+                            ->orWhere('patronymic', 'like', "%$part%");
+                    }
+                });
+            });
+        }
+
+        $applications = $query->paginate(10)->appends($request->all());
+
         return view('users.applications.credit2.index', [
             'applications' => $applications
         ]);

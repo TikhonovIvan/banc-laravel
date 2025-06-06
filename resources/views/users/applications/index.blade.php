@@ -57,7 +57,7 @@
                                     @elseif ($application->status === 'в обработке')
                                         <span class="text-primary">{{ $application->status }}</span>
                                     @elseif ($application->status === 'ожидает документов')
-                                        <span class="text-secondary">{{ $application->status }}</span>
+                                        <span class="text-warning">{{ $application->status }}</span>
                                     @else
                                         <span class="text-muted">{{ $application->status }}</span>
                                     @endif
@@ -80,13 +80,30 @@
                             </div>
                         </div>
                     @endforeach
+                    {{-- Пагинация потребительских кредитов --}}
+                    <div class="mt-4 w-100 d-flex justify-content-center">
+                        {{ $loanApplications->appends(request()->query())->links() }}
+                    </div>
 
                     {{-- Ипотека --}}
                     @foreach ($mortgageApplications as $application)
                         <div class="card d-flex flex-column"   style="width: 18rem; ">
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">Ипотечный кредит</h5>
-                                <p class="card-text">Статус заявки: <span>{{ $application->status }}</span></p>
+                                <p class="card-text">
+                                    Статус заявки:
+                                    @if ($application->status === 'одобрено')
+                                        <span class="text-success">{{ $application->status }}</span>
+                                    @elseif ($application->status === 'отклонено')
+                                        <span class="text-danger">{{ $application->status }}</span>
+                                    @elseif ($application->status === 'в обработке')
+                                        <span class="text-primary">{{ $application->status }}</span>
+                                    @elseif ($application->status === 'ожидает документов')
+                                        <span class="text-warning">{{ $application->status }}</span>
+                                    @else
+                                        <span class="text-muted">{{ $application->status }}</span>
+                                    @endif
+                                </p>
                                 <p class="card-text">Сумма кредита: {{ number_format($application->loan_amount, 0, '.', ' ') }} сом</p>
                                 <p class="card-text">Срок кредита: {{ $application->term_years }} лет</p>
                                 <p class="card-text">Тип недвижимости: {{ $application->property_type }}</p>
@@ -104,12 +121,30 @@
                         </div>
                     @endforeach
 
+                    {{-- Пагинация ипотек --}}
+                    <div class="mt-4 w-100 d-flex justify-content-center">
+                        {{ $mortgageApplications->appends(request()->query())->links() }}
+                    </div>
+
                     {{-- Автокредит --}}
                     @foreach ($autoCreditApplications as $application)
                         <div class="card d-flex flex-column"  style="width: 18rem;">
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">Автокредит</h5>
-                                <p class="card-text">Статус заявки: <span>{{ $application->status }}</span></p>
+                                <p class="card-text">
+                                    Статус заявки:
+                                    @if ($application->status === 'одобрено')
+                                        <span class="text-success">{{ $application->status }}</span>
+                                    @elseif ($application->status === 'отклонено')
+                                        <span class="text-danger">{{ $application->status }}</span>
+                                    @elseif ($application->status === 'в обработке')
+                                        <span class="text-primary">{{ $application->status }}</span>
+                                    @elseif ($application->status === 'ожидает документов')
+                                        <span class="text-warning">{{ $application->status }}</span>
+                                    @else
+                                        <span class="text-muted">{{ $application->status }}</span>
+                                    @endif
+                                </p>
                                 <p class="card-text">Сумма кредита: {{ number_format($application->loan_amount, 0, '.', ' ') }} сом</p>
                                 <p class="card-text">Срок кредита: {{ $application->term_months }} мес.</p>
                                 <p class="card-text">Марка и модель: {{ $application->car_make_model }}</p>
@@ -127,6 +162,10 @@
                             </div>
                         </div>
                     @endforeach
+                    {{-- Пагинация автокредитов --}}
+                    <div class="mt-4 w-100 d-flex justify-content-center">
+                        {{ $autoCreditApplications->appends(request()->query())->links() }}
+                    </div>
 
                 </div>
 
