@@ -21,7 +21,7 @@ class Credit1Controller extends Controller
             abort(403);
         }
 
-        $applications = LoanApplication::with('user')->paginate(1);
+        $applications = LoanApplication::with('user')->paginate(5);
         return view('users.applications.credit1.index', [
             'applications' => $applications
         ]);

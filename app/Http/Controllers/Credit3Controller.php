@@ -20,7 +20,7 @@ class Credit3Controller extends Controller
             abort(403);
         }
 
-        $applications = AutoCreditApplication::with('user')->paginate(1);
+        $applications = AutoCreditApplication::with('user')->paginate(5);
         return view('users.applications.credit3.index', [
             'applications' => $applications
         ]);

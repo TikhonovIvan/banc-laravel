@@ -10,6 +10,28 @@
             <h3 class="text-center mb-5">Пользователи системы</h3>
         </div>
 
+        <form action="{{ route('users.index') }}" method="GET" class="mb-4">
+            <div class="row">
+                <div class="col-md-1">
+                    <input type="text" name="id" class="form-control" placeholder="ID" value="{{ request('id') }}">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="fio" class="form-control" placeholder="ФИО (частично)" value="{{ request('fio') }}">
+                </div>
+                <div class="col-md-2">
+                    <input type="text" name="email" class="form-control" placeholder="Email" value="{{ request('email') }}">
+                </div>
+                <div class="col-md-2">
+                    <input type="text" name="phone" class="form-control" placeholder="Телефон" value="{{ request('phone') }}">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Поиск</button>
+                </div>
+                <div class="col-md-2">
+                    <a href="{{ route('users.index') }}" class="btn btn-secondary w-100">Сбросить</a>
+                </div>
+            </div>
+        </form>
 
         <div class="row">
             <table class="table">

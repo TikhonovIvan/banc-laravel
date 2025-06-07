@@ -72,7 +72,11 @@
                                             {{--                                                </ul>--}}
                                             {{--                                            </li>--}}
 
-                                            <li><a href="#" class="account">{{auth()->user()->email}}</a></li>
+                                            <li><a href="#" class="">Добро пожаловать
+                                                    <br>{{auth()->user()->surname}} {{auth()->user()->name}} {{auth()->user()->patronymic}}</a>
+
+
+                                            </li>
                                         @else
                                             <li class=""><a href="{{route('home')}}">Главная</a></li>
                                             <li><a href="{{route('about')}}">О нас</a></li>
