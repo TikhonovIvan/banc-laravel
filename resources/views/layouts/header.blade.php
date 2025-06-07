@@ -81,7 +81,7 @@
                                             <li class=""><a href="{{route('home')}}">Главная</a></li>
                                             <li><a href="{{route('about')}}">О нас</a></li>
                                             <li><a href="{{route('services')}}">Услуги</a></li>
-                                            <li>
+                                            <li class="d-none">
                                                 <a href="blog.html">Блог</a>
                                                 <ul class="submenu">
                                                     <li><a href="blog.html">Блог</a></li>

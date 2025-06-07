@@ -21,7 +21,7 @@
                         </h1>
                         <!-- Hero Btn -->
                         <a
-                            href="#"
+                            href="{{route('login')}}"
                             class="btn hero-btn"
                             data-animation="fadeInLeft"
                             data-delay=".8s"
@@ -45,7 +45,7 @@
                         </h1>
                         <!-- Hero Btn -->
                         <a
-                            href="apply.html"
+                            href="{{route('login')}}"
                             class="btn hero-btn"
                             data-animation="fadeInLeft"
                             data-delay=".8s"
@@ -310,7 +310,7 @@
                             <input type="text" placeholder="Сумма возврата" />
                         </div>
                         <div class="search-form">
-                            <a href="apply.html">Подать заявку</a>
+                            <a  href="{{route('login')}}">Подать заявку</a>
                         </div>
                     </form>
                 </div>
@@ -429,7 +429,7 @@
     <!-- Team Ara End -->
 
     <!-- Blog Ara Start -->
-    <div class="home-blog-area section-padding30">
+    <div class="home-blog-area section-padding30 d-none">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-md-10">

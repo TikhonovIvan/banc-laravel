@@ -46,6 +46,7 @@
                                     class="form-control"
                                     id="exampleInputEmail1"
                                     aria-describedby="emailHelp"
+                                    placeholder="user@gmail.com"
                                 />
                                 <small id="emailHelp" class="form-text text-muted"
                                 >Введите ваш email для входа в личный кабинет.</small
@@ -58,6 +59,7 @@
                                     type="password"
                                     class="form-control"
                                     id="exampleInputPassword1"
+                                    placeholder="Пароль"
                                 />
                                 <small id="emailHelp" class="form-text text-muted"
                                 >Введите пароль для входа.</small

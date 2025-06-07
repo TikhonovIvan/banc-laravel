@@ -27,7 +27,9 @@
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
                                     <label>Сумма кредита</label>
-                                    <input type="number" class="form-control" name="loan_amount" required>
+                                    <input type="number" class="form-control" name="loan_amount"
+                                           placeholder="1000000"
+                                           required>
                                 </div>
                                 <div class="row">
                                     <div class="col-4">
@@ -54,16 +56,16 @@
 
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
-                                    <label>Регион покупки недвижимости</label>
-                                    <input type="text" class="form-control" name="region" required>
+                                    <label>Район покупки недвижимости</label>
+                                    <input type="text" class="form-control" name="region" placeholder="Первомайский район" required>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label>Стоимость недвижимости</label>
-                                    <input type="number" class="form-control" name="property_value" required>
+                                    <input type="number" class="form-control" name="property_value" placeholder="2000000" required>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label>Первоначальный взнос</label>
-                                    <input type="number" class="form-control" name="initial_payment" required>
+                                    <input type="number" class="form-control" name="initial_payment" placeholder="1000000"  required>
                                 </div>
                             </div>
 

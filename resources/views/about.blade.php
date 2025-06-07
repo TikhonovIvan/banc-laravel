@@ -43,7 +43,7 @@
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                             oeiusmod tempor incididunt ut labore et dolore magna aliq.
                         </p>
-                        <a href="apply.html" class="btn">Подать заявку на кредит</a>
+                        <a  href="{{route('login')}}" class="btn">Подать заявку на кредит</a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12">
@@ -159,7 +159,7 @@
                             <input type="text" placeholder="Сумма возврата" />
                         </div>
                         <div class="search-form">
-                            <a href="apply.html">Подать заявку</a>
+                            <a  href="{{route('login')}}">Подать заявку</a>
                         </div>
                     </form>
                 </div>
@@ -169,7 +169,7 @@
     <!-- Application Area End -->
 
     <!-- Blog Ara Start -->
-    <div class="home-blog-area section-padding30">
+    <div class="home-blog-area section-padding30 d-none" >
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-md-10">

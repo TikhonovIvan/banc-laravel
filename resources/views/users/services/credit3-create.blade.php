@@ -20,7 +20,7 @@
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
                                     <label>Сумма кредита</label>
-                                    <input type="number" class="form-control" name="loan_amount" required>
+                                    <input type="number" class="form-control" name="loan_amount" placeholder="100000"  required>
                                 </div>
 
                                 <div class="col-md-3 mb-3">
