@@ -250,8 +250,18 @@ class Credit1Controller extends Controller
             ->where('user_id', Auth::id())
             ->firstOrFail();
 
+        // Удаление связанных файлов с диска
+        $folderPath = public_path("uploads/credit1/{$application->id}");
+        if (File::exists($folderPath)) {
+            File::deleteDirectory($folderPath);
+        }
+
+        // Удаление записей о документах из базы данных
+        $application->documents()->delete(); // предполагается, что есть связь documents()
+
+        // Удаление самой заявки
         $application->delete();
 
-        return redirect()->route('applications.index')->with('success', 'Потребительский кредит отменен.');
+        return redirect()->route('applications.index')->with('success', 'Потребительский кредит отменен и файлы удалены.');
     }
 }

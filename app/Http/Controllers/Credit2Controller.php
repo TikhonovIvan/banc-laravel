@@ -240,8 +240,18 @@ class Credit2Controller extends Controller
             ->where('user_id', Auth::id())
             ->firstOrFail();
 
+        // Удалить файлы с диска (если есть)
+        $directory = "uploads/credit2/{$application->id}";
+        if (Storage::disk('public_uploads')->exists($directory)) {
+            Storage::disk('public_uploads')->deleteDirectory($directory);
+        }
+
+        // Удалить связанные документы из БД
+        $application->documents()->delete(); // Обязательно должно быть отношение documents()
+
+        // Удалить саму заявку
         $application->delete();
 
-        return redirect()->route('applications.index')->with('success', 'Ипотечная заявка отменена.');
+        return redirect()->route('applications.index')->with('success', 'Ипотечная заявка отменена и файлы удалены.');
     }
 }
