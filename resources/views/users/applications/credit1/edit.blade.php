@@ -38,9 +38,19 @@
                                 <label>Загруженные документы:</label>
                                 @forelse ($application->documents as $doc)
                                     <div class="d-flex align-items-center mb-2" style="color: #000">
-                                        <a href="{{ asset($doc->file_path) }}" target="_blank"  class="mr-3" style="color: #000">
+
+
+                                        <a href="{{ asset('storage/' . $doc->file_path) }}"
+                                           target="_blank"
+                                           class="mr-3"
+                                           style="color: #000">
                                             {{ $doc->original_name }}
                                         </a>
+                                        <a href="{{ route('credit1.document.download', $doc->id) }}"
+                                           class="btn btn-sm btn-outline-primary mr-2">
+                                            Скачать
+                                        </a>
+
 
                                         <form action="{{ route('credit1.document.destroy', $doc->id) }}"
                                               method="POST" class="ml-3">

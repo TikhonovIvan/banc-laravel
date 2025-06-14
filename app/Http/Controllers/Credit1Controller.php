@@ -27,6 +27,20 @@ class Credit1Controller extends Controller
         ]);
     }
 
+    public function downloadDocument($id)
+    {
+        $document = LoanDocument::findOrFail($id);
+
+        // Абсолютный путь к файлу в public/uploads
+        $fullPath = public_path($document->file_path);
+
+        if (!file_exists($fullPath)) {
+            abort(404, 'Файл не найден');
+        }
+
+        return response()->download($fullPath, $document->original_name);
+    }
+
     public function search(Request $request)
     {
         if (Gate::denies('index-credit1')) {
@@ -101,6 +115,7 @@ class Credit1Controller extends Controller
             'comment' => $validated['comment'] ?? null,
             'status' => 'в обработке',
         ]);
+
 
         if ($request->hasFile('documents')) {
             $uploadPath = public_path("uploads/credit1/{$application->id}");

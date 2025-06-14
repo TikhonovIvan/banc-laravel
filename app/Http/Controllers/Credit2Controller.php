@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\File;
+
+
 class Credit2Controller extends Controller
 {
     /**
@@ -25,6 +27,20 @@ class Credit2Controller extends Controller
         return view('users.applications.credit2.index', [
             'applications' => $applications
         ]);
+    }
+
+    public function downloadDocument($id)
+    {
+        $document = MortgageDocument::findOrFail($id);
+
+        // Абсолютный путь к файлу в public/uploads
+        $fullPath = public_path($document->file_path);
+
+        if (!file_exists($fullPath)) {
+            abort(404, 'Файл не найден');
+        }
+
+        return response()->download($fullPath, $document->original_name);
     }
 
     public function search(Request $request)

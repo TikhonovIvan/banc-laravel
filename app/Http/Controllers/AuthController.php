@@ -88,15 +88,6 @@ class AuthController extends Controller
             'work_address' => ['nullable', 'string'],
         ]);
 
-        // Ручная проверка совпадения пароля и повторного ввода
-//        if ($validated['password'] !== $validated['repeat_password']) {
-//            return back()
-//                ->withErrors(['repeat_password' => 'Пароли не совпадают'])
-//                ->withInput();
-//        }
-//
-//        // Удаляем repeat_password, чтобы не сохранять в БД
-//        unset($validated['repeat_password']);
 
         // Хешируем пароль
         $validated['password'] = bcrypt($validated['password']);

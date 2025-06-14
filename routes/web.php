@@ -21,7 +21,6 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/register', [AuthController::class, 'registerForm'])->name('register');
     Route::post('/register', [AuthController::class, 'store'])->name('register.create');
 });
-
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -31,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/users/{id}/show', [HomeController::class, 'creditShowUser'])->name('credit-users.show');
 
     Route::put('/account/{id}', [AuthController::class, 'update'])->name('account.update');
+
 
 
 
@@ -46,6 +46,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/credit1/{id}/show', [Credit1Controller::class, 'show'])->name('credit1.show');
     Route::delete('/credit1/{id}', [Credit1Controller::class, 'destroy'])->name('credit1.destroy');
     Route::get('/credit1/search', [Credit1Controller::class, 'search'])->name('credit1.search');
+    Route::get('/credit1/document/{id}/download', [Credit1Controller::class, 'downloadDocument'])
+        ->name('credit1.document.download');
+
     /*credit1 end*/
 
     /*credit2 start*/
@@ -58,6 +61,9 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/credit2/document/{id}', [Credit2Controller::class, 'destroyDocument'])->name('credit2.document.destroy');
     Route::get('/credit2/{id}/show', [Credit2Controller::class, 'show'])->name('credit2.show');
     Route::delete('/credit2/{id}', [Credit2Controller::class, 'destroy'])->name('credit2.destroy');
+
+    Route::get('/credit2/document/{id}/download', [Credit2Controller::class, 'downloadDocument'])
+        ->name('credit2.document.download');
     /*credit2 end*/
 
 
@@ -71,11 +77,12 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/credit3/document/{id}', [Credit3Controller::class, 'destroyDocument'])->name('credit3.document.destroy');
     Route::get('/credit3/{id}/show', [Credit3Controller::class, 'show'])->name('credit3.show');
     Route::delete('/credit3/{id}', [Credit3Controller::class, 'destroy'])->name('credit3.destroy');
-    Route::get('/applications', [ApplicationsController::class, 'index'])->name('applications.index');
+    Route::get('/credit3/document/{id}/download', [Credit2Controller::class, 'downloadDocument'])
+        ->name('credit3.document.download');
     /*credit3 end*/
+    Route::get('/applications', [ApplicationsController::class, 'index'])->name('applications.index');
+
 });
-
-
 
 
 
