@@ -9,7 +9,28 @@
                 <div class="row">
                     <div class="col-12">
                         <h3 class="mb-5 text-center">Обновить Автокредит</h3>
+                        <div class="row d-flex justify-content-center" >
+                            <div class="col-6 text-center">
 
+                                @if ($errors->any())
+                                    <div class="alert alert-danger alert-dismissible  show" role="alert">
+                                        <ul class="list-unstyled">
+                                            @foreach ($errors->all() as $error)
+                                                <li> <strong>{{ $error }}</strong> </li>
+                                            @endforeach
+                                        </ul>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
+
+                                @if (session('success'))
+                                    <div class="alert alert-success alert-dismissible  show" role="alert">
+                                        <strong>{{session('success')}}</strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
                         {{-- Список загруженных документов --}}
                         <div class="form-row mt-3">
                             <div class="col-md-12">

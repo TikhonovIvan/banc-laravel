@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Storage;
 
 class Credit3Controller extends Controller
 {
@@ -31,15 +30,16 @@ class Credit3Controller extends Controller
     {
         $document = AutoCreditFile::findOrFail($id);
 
-        // Путь к файлу в storage/app/public/...
-        $filePath = $document->file_path;
+        // Абсолютный путь к файлу в public/uploads
+        $fullPath = public_path($document->file_path);
 
-        if (!Storage::disk('public')->exists($filePath)) {
+        if (!file_exists($fullPath)) {
             abort(404, 'Файл не найден');
         }
 
-        return Storage::disk('public')->download($filePath, $document->original_name);
+        return response()->download($fullPath, $document->original_name);
     }
+
     public function search(Request $request)
     {
         if (Gate::denies('index-credit1')) {

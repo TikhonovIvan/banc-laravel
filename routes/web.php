@@ -77,7 +77,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/credit3/document/{id}', [Credit3Controller::class, 'destroyDocument'])->name('credit3.document.destroy');
     Route::get('/credit3/{id}/show', [Credit3Controller::class, 'show'])->name('credit3.show');
     Route::delete('/credit3/{id}', [Credit3Controller::class, 'destroy'])->name('credit3.destroy');
-    Route::get('/credit3/document/{id}/download', [Credit2Controller::class, 'downloadDocument'])
+    Route::get('/credit3/document/{id}/download', [Credit3Controller::class, 'downloadDocument'])
         ->name('credit3.document.download');
     /*credit3 end*/
     Route::get('/applications', [ApplicationsController::class, 'index'])->name('applications.index');
